@@ -19,6 +19,45 @@
     </div>
     <script>
         fImagenCarga('','idImagenCarga','media/logo.png','150px', 'idContainer')
+        // Paso 1: Reemplaza TU_ID_DE_ARCHIVO con el ID de tu archivo de Google Drive
+        const googleDriveFileId = 'TU_ID_DE_ARCHIVO'; 
+        const jsonUrl = `https://drive.google.com/uc?export=download&id=${googleDriveFileId}`;
+        // Paso 2: Usar la API Fetch para leer el archivo JSON
+        fetch(jsonUrl)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('No se pudo cargar el archivo. Verifica el ID y los permisos.');
+                }
+                return response.json(); // Convertir la respuesta a JSON
+            })
+            .then(data => {
+                // Paso 3: Manipular los datos y mostrarlos en la página
+                const contentDiv = document.getElementById('json-content');
+
+                // Asegúrate de que 'data' sea un array. 
+                // En este ejemplo, asumimos que el JSON es un array de objetos
+                if (Array.isArray(data)) {
+                    data.forEach(item => {
+                        const itemDiv = document.createElement('div');
+                        itemDiv.className = 'item';
+                        
+                        // Ejemplo: Si cada objeto tiene 'nombre' y 'precio'
+                        itemDiv.innerHTML = `
+                            <h2>${item.cNombreEmpresa}</h2>
+                            <p>Precio: $${item.cLogoEmpresa}</p>
+                            <p>Disponible: ${item.cFondoEmpresa}</p>
+                        `;
+
+                        contentDiv.appendChild(itemDiv);
+                    });
+                } else {
+                    contentDiv.textContent = 'El archivo JSON no contiene un array.';
+                }
+            })
+            .catch(error => {
+                console.error('Error al cargar el archivo JSON:', error);
+                document.getElementById('json-content').textContent = 'Error al cargar los datos: ' + error.message;
+            });
     </script>
 
 </body>
