@@ -20,16 +20,12 @@
     <script>
         // fImagenCarga('','idImagenCarga','media/logo.png','150px', 'idContainer')
         // Paso 1: Reemplaza TU_ID_DE_ARCHIVO con el ID de tu archivo de Google Drive
-        // Paso 1: Reemplaza TU_ID_DE_ARCHIVO con el ID de tu archivo de Google Drive
         const googleDriveFileId = '1-_aa4edxuc6LhyEuFyYBUGUCuuQd-k6E'; 
         const jsonUrl = `https://drive.google.com/uc?export=download&id=${googleDriveFileId}`;
-
         // Paso 2: Usa un proxy CORS para evitar el error
         const corsProxyUrl = 'https://api.allorigins.win/raw?url=';
-
         // Combina el proxy con tu URL del archivo de Google Drive
         const finalUrl = `${corsProxyUrl}${encodeURIComponent(jsonUrl)}`;
-
         // Paso 3: Usar la API Fetch para leer el archivo JSON
         fetch(finalUrl)
             .then(response => {
@@ -42,7 +38,9 @@
                 // ... (el resto de tu código para mostrar los datos es el mismo)
                 const contentDiv = document.getElementById('json-content');
                 if (Array.isArray(data)) {
-                    data.forEach(item => {
+                    console.log('Datos cargados:', data[0].cNombreEmpresa, 
+                        data[0].cLogoEmpresa, data[0].cFondoEmpresa);
+/*                     data.forEach(item => {
                         const itemDiv = document.createElement('div');
                         itemDiv.className = 'item';
                         itemDiv.innerHTML = `
@@ -53,7 +51,7 @@
                         `;
                         contentDiv.appendChild(itemDiv);
                     });
-                } else {
+ */                } else {
                     contentDiv.textContent = 'El archivo JSON no contiene un array.';
                 }
             })
