@@ -18,10 +18,11 @@
 
     </div>
     <script>
-        fImagenCarga('','idImagenCarga','media/logo.png','150px', 'idContainer')
+        // fImagenCarga('','idImagenCarga','media/logo.png','150px', 'idContainer')
         // Paso 1: Reemplaza TU_ID_DE_ARCHIVO con el ID de tu archivo de Google Drive
-        const googleDriveFileId = 'TU_ID_DE_ARCHIVO'; 
+        const googleDriveFileId = '1-_aa4edxuc6LhyEuFyYBUGUCuuQd-k6E'; 
         const jsonUrl = `https://drive.google.com/uc?export=download&id=${googleDriveFileId}`;
+        console.log(jsonUrl);
         // Paso 2: Usar la API Fetch para leer el archivo JSON
         fetch(jsonUrl)
             .then(response => {
@@ -43,6 +44,7 @@
                         
                         // Ejemplo: Si cada objeto tiene 'nombre' y 'precio'
                         itemDiv.innerHTML = `
+                            <h2>JOHANN LOZADA</h2>
                             <h2>${item.cNombreEmpresa}</h2>
                             <p>Precio: $${item.cLogoEmpresa}</p>
                             <p>Disponible: ${item.cFondoEmpresa}</p>
