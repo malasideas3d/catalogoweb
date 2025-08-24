@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="./index.css">
     <script type="module" src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script src="./index.js"></script>
-    <title>Catalogo - MI3D</title>
+    <title></title>
     <link rel="shortcut icon" type="image/x-icon" href="media/logofavicon.ico">
 </head>
 <body>
@@ -38,9 +38,12 @@
                 // ... (el resto de tu código para mostrar los datos es el mismo)
                 const contentDiv = document.getElementById('json-content');
                 if (Array.isArray(data)) {
-                    console.log('Datos cargados:', data[0].cNombreEmpresa,
-                        data[0].cLogoEmpresa, data[0].cFondoEmpresa);
-                    document.title = data[0].cNombrePagina;
+                    console.log('Datos cargados:', data);
+                    document.title = data[0].cNombreEmpresa + " - " + data[0].cNombrePagina;
+                    document.body.style.backgroundImage = "url('" + data[0].cFondoEmpresa + "')";
+                    document.body.style.backgroundSize = "cover";
+                    document.body.style.backgroundRepeat = "no-repeat";
+                    document.body.style.backgroundPosition = "center";
 /*                     data.forEach(item => {
                         const itemDiv = document.createElement('div');
                         itemDiv.className = 'item';
