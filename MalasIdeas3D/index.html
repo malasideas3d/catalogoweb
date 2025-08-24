@@ -38,8 +38,9 @@
                 // ... (el resto de tu código para mostrar los datos es el mismo)
                 const contentDiv = document.getElementById('json-content');
                 if (Array.isArray(data)) {
-                    console.log('Datos cargados:', data[0].cNombreEmpresa, 
+                    console.log('Datos cargados:', data[0].cNombreEmpresa,
                         data[0].cLogoEmpresa, data[0].cFondoEmpresa);
+                    document.title = data[0].cNombrePagina;
 /*                     data.forEach(item => {
                         const itemDiv = document.createElement('div');
                         itemDiv.className = 'item';
