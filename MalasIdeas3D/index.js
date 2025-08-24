@@ -1,7 +1,6 @@
 /*CONFIGURACION INICIAL*/
 /* Borrar logo de carga */
-/*
-window.addEventListener('load', function() {
+/* window.addEventListener('load', function() {
   const loadingScreen = document.querySelector('.ClassObjetoCargar');
   for (let i = 1; i <= 8; i++) {
     setTimeout(function() {
@@ -10,7 +9,7 @@ window.addEventListener('load', function() {
       }
     }, i * 1000);
   }
-});*/
+}); */
 /**** Colocar CSS inicial en HEAD */
 const oStylePagina = document.createElement('style');
 oStylePagina.textContent = "\
@@ -68,7 +67,7 @@ function fInsertarCssCode(pComodin, pCssCode){
   oStylePagina.textContent = oStylePagina.textContent.replace(pComodin, pCssCode + pComodin);
 }
 
-function fImagenCarga(pPadre, pIdIdentificador, pDirImagen, pTamano, pContenedor) {
+function fImagenCarga(pPadre, pIdIdentificador, pImagen, pTamano, pContenedor, pFondoImagen) {
   //Crear div
   let oContenedor = document.createElement('div');
     oContenedor.setAttribute('id', pIdIdentificador + 'Div');
@@ -80,10 +79,10 @@ function fImagenCarga(pPadre, pIdIdentificador, pDirImagen, pTamano, pContenedor
     oContenedor.style.top = '50%';
     oContenedor.style.left = '50%';
     oContenedor.style.transform = 'translate(-50%, -50%)';
-      //Crear imagen
+      //Crear e insertar imagen
       let oImg = document.createElement('img');
         oImg.setAttribute('id', pIdIdentificador + 'Img');
-        oImg.setAttribute('src', pDirImagen);
+        oImg.setAttribute('src', pImagen);
         oImg.setAttribute('class', 'ClassObjetoCargar');
         oImg.style.width = pTamano;
         oImg.style.height = pTamano;
@@ -108,14 +107,20 @@ function fImagenCarga(pPadre, pIdIdentificador, pDirImagen, pTamano, pContenedor
       }\
     }";
   fInsertarCssCode('/*[1]*/', vCssCodigo);
-  //Ocultar despues de la carga el GLTF
-  pContenedor.addEventListener('load', function() {
-    if (pContenedor.loaded) {
-      vtiempo = '0.25';
-      oContenedor.style.animation = 'fadein ' + vtiempo + 's';
-      setTimeout(() => {
-        oImg.style.display = 'none';
-      }, Number(vtiempo)*990);
+  //Ocultar despues de la carga en segundos
+    if (oImg) {
+      oImg.addEventListener('load', function() {
+        const vTiempoAnimacion = 1;
+        setTimeout(() => {
+          oImg.style.display = 'none';
+            // Establece la URL de la imagen de fondo del body
+            document.body.style.backgroundImage = `url('${pFondoImagen}')`;
+            document.body.style.backgroundSize = "cover";
+            document.body.style.backgroundRepeat = "no-repeat";
+            document.body.style.backgroundAttachment = "fixed";
+            document.body.style.backgroundPosition = "center center";
+            document.body.style.transition = 'background-image 1s ease-in-out';
+        }, vTiempoAnimacion * 1000 + 50);
+      });
     }
-  });
 }

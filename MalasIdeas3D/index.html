@@ -13,12 +13,10 @@
     <link rel="shortcut icon" type="image/x-icon" href="media/logofavicon.ico">
 </head>
 <body>
-
     <div id="idContainer">
 
     </div>
     <script>
-        // fImagenCarga('','idImagenCarga','media/logo.png','150px', 'idContainer')
         // Paso 1: Reemplaza TU_ID_DE_ARCHIVO con el ID de tu archivo de Google Drive
         const googleDriveFileId = '1-_aa4edxuc6LhyEuFyYBUGUCuuQd-k6E'; 
         const jsonUrl = `https://drive.google.com/uc?export=download&id=${googleDriveFileId}`;
@@ -40,22 +38,9 @@
                 if (Array.isArray(data)) {
                     console.log('Datos cargados:', data);
                     document.title = data[0].cNombreEmpresa + " - " + data[0].cNombrePagina;
-                    document.body.style.backgroundImage = "url('" + data[0].cFondoEmpresa + "')";
-                    document.body.style.backgroundSize = "cover";
-                    document.body.style.backgroundRepeat = "no-repeat";
-                    document.body.style.backgroundPosition = "center";
-/*                     data.forEach(item => {
-                        const itemDiv = document.createElement('div');
-                        itemDiv.className = 'item';
-                        itemDiv.innerHTML = `
-                            <h2>JOHANN LOZADA</h2>
-                            <h2>${item.cNombreEmpresa}</h2>
-                            <p>Precio: $${item.cNombreEmpresa}</p>
-                            <p>Disponible: ${item.cNombreEmpresa}</p>
-                        `;
-                        contentDiv.appendChild(itemDiv);
-                    });
- */                } else {
+                    // Cargar imagen splash screen
+                    fImagenCarga('','idImagenCarga',data[0].cLogoEmpresa,'150px', document, data[0].cFondoEmpresa)
+                } else {
                     contentDiv.textContent = 'El archivo JSON no contiene un array.';
                 }
             })
