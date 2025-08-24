@@ -13,9 +13,6 @@
     <link rel="shortcut icon" type="image/x-icon" href="media/logofavicon.ico">
 </head>
 <body>
-    <div id="idContainer">
-
-    </div>
     <script>
         // Paso 1: Reemplaza TU_ID_DE_ARCHIVO con el ID de tu archivo de Google Drive
         const googleDriveFileId = '1-_aa4edxuc6LhyEuFyYBUGUCuuQd-k6E'; 
@@ -49,6 +46,28 @@
                 document.getElementById('json-content').textContent = 'Error al cargar los datos: ' + error.message;
             });
     </script>
-
+    
+    <header id="header-dinamico"></header>
+    <main class="body-content">
+        <h2>Bienvenido a mi sitio</h2>
+        <p>Este es el contenido principal de la página, diseñado para ser adaptable a cualquier dispositivo.</p>
+        <div class="tarjetas">
+            <div class="tarjeta">
+                <h3>Tarjeta 1</h3>
+                <p>Contenido de la tarjeta.</p>
+            </div>
+            <div class="tarjeta">
+                <h3>Tarjeta 2</h3>
+                <p>Contenido de la tarjeta.</p>
+            </div>
+            <div class="tarjeta">
+                <h3>Tarjeta 3</h3>
+                <p>Contenido de la tarjeta.</p>
+            </div>
+        </div>
+    </main>
+    <footer class="footer">
+        <p>&copy; 2025 Mi Compañía. Todos los derechos reservados.</p>
+    </footer>
 </body>
 </html>
