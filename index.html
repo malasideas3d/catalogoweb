@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplicación con Splash Screen</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 500px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+            min-height: 500px;
+        }
+        
+        /* Splash Screen */
+        #splash-screen {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 100%;
+            transition: opacity 0.5s ease;
+        }
+        
+        .logo-container {
+            margin-bottom: 30px;
+        }
+        
+        .loading-logo {
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .loading-text {
+            font-size: 18px;
+            color: #3498db;
+            margin-top: 20px;
+        }
+        
+        .progress-bar {
+            width: 80%;
+            height: 8px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+        
+        /* Pantallas */
+        .screen {
+            display: none;
+            animation: fadeIn 0.5s;
+            text-align: center;
+        }
+        
+        .active {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        
+        h2 {
+            color: #3498db;
+            margin-bottom: 25px;
+            font-size: 24px;
+        }
+        
+        p {
+            margin-bottom: 20px;
+            line-height: 1.6;
+            color: #7f8c8d;
+        }
+        
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        button {
+            background: linear-gradient(to right, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn-back {
+            background: linear-gradient(to right, #e74c3c, #c0392b);
+        }
+        
+        .btn-home {
+            background: linear-gradient(to right, #2ecc71, #27ae60);
+        }
+        
+        .screen-content {
+            padding: 20px;
+        }
+        
+        .screen-icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .screen-indicator {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #f1c40f;
+            color: #34495e;
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Splash Screen -->
+        <div id="splash-screen" class="active">
+            <div class="logo-container">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIiBmaWxsPSJub25lIj48Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9IjkwIiBmaWxsPSIjMzQ5OEZCIiBzdHJva2U9IiMyOTgwQjkiIHN0cm9rZS13aWR0aD0iNCIvPjxwYXRoIGQ9Ik03MCA3MCBBMzAgMzAgMCAxIDAgMTMwIDEzMCBBMzAgMzAgMCAxIDAgNzAgNzAiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iOCIgLz48cGF0aCBkPSJNNzAgNzAgTDEzMCAxMzAgTTEzMCA3MCBMNzAgMTMwIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjgiIC8+PC9zdmc+" alt="Logo" class="loading-logo">
+            </div>
+            <h2>Cargando datos</h2>
+            <p>Obteniendo información desde Google Sheets...</p>
+            <div class="progress-bar">
+                <div class="progress" id="progress"></div>
+            </div>
+            <p class="loading-text" id="loading-text">Iniciando...</p>
+        </div>
+        
+        <!-- Pantalla de Inicio -->
+        <div id="home-screen" class="screen">
+            <h1>Bienvenido a la Aplicación</h1>
+            <p>Selecciona una de las opciones para navegar a diferentes pantallas.</p>
+            <div class="btn-container">
+                <button onclick="showScreen('screen-01')">Botón 1</button>
+                <button onclick="showScreen('screen-02')">Botón 2</button>
+                <button onclick="showScreen('screen-03')">Botón 3</button>
+            </div>
+        </div>
+        
+        <!-- Pantalla 01 -->
+        <div id="screen-01" class="screen">
+            <div class="screen-indicator">Pantalla 01</div>
+            <div class="screen-content">
+                <div class="screen-icon">📱</div>
+                <h2>Pantalla 01</h2>
+                <p>Has navegado a la Pantalla 01. Esta es una pantalla de ejemplo con contenido único.</p>
+                <div class="btn-container">
+                    <button class="btn-back" onclick="showScreen('home-screen')">Volver al Inicio</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pantalla 02 -->
+        <div id="screen-02" class="screen">
+            <div class="screen-indicator">Pantalla 02</div>
+            <div class="screen-content">
+                <div class="screen-icon">💻</div>
+                <h2>Pantalla 02</h2>
+                <p>Has navegado a la Pantalla 02. Esta es otra pantalla de ejemplo con contenido diferente.</p>
+                <div class="btn-container">
+                    <button class="btn-back" onclick="showScreen('home-screen')">Volver al Inicio</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pantalla 03 -->
+        <div id="screen-03" class="screen">
+            <div class="screen-indicator">Pantalla 03</div>
+            <div class="screen-content">
+                <div class="screen-icon">🚀</div>
+                <h2>Pantalla 03</h2>
+                <p>Has navegado a la Pantalla 03. Esta pantalla tiene un botón adicional para ir a la Pantalla 04.</p>
+                <div class="btn-container">
+                    <button onclick="showScreen('screen-04')">Botón 4</button>
+                    <button class="btn-home" onclick="showScreen('home-screen')">Volver al Inicio</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pantalla 04 -->
+        <div id="screen-04" class="screen">
+            <div class="screen-indicator">Pantalla 04</div>
+            <div class="screen-content">
+                <div class="screen-icon">🎯</div>
+                <h2>Pantalla 04</h2>
+                <p>Has navegado a la Pantalla 04. Esta pantalla fue accedida desde la Pantalla 03.</p>
+                <div class="btn-container">
+                    <button class="btn-back" onclick="showScreen('screen-03')">Volver a Pantalla 03</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Función para mostrar una pantalla específica
+        function showScreen(screenId) {
+            // Ocultar todas las pantallas
+            const screens = document.querySelectorAll('.screen');
+            screens.forEach(screen => {
+                screen.classList.remove('active');
+            });
+            
+            // Mostrar la pantalla seleccionada
+            const selectedScreen = document.getElementById(screenId);
+            selectedScreen.classList.add('active');
+        }
+        
+        // Función para simular la carga de datos desde Google Sheets
+        function simulateDataLoading() {
+            const progressBar = document.getElementById('progress');
+            const loadingText = document.getElementById('loading-text');
+            const splashScreen = document.getElementById('splash-screen');
+            
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 10;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    
+                    // Actualizar la barra de progreso y texto
+                    progressBar.style.width = progress + '%';
+                    loadingText.textContent = '¡Carga completada!';
+                    
+                    // Esperar un momento y luego mostrar la pantalla principal
+                    setTimeout(() => {
+                        // Ocultar completamente el splash screen
+                        splashScreen.classList.add('hidden');
+                        // Mostrar la pantalla principal
+                        document.getElementById('home-screen').classList.add('active');
+                    }, 800);
+                } else {
+                    // Actualizar la barra de progreso y texto
+                    progressBar.style.width = progress + '%';
+                    
+                    // Mensajes de carga según el progreso
+                    if (progress < 30) {
+                        loadingText.textContent = 'Conectando con Google Sheets...';
+                    } else if (progress < 60) {
+                        loadingText.textContent = 'Descargando datos...';
+                    } else {
+                        loadingText.textContent = 'Procesando información...';
+                    }
+                }
+            }, 300);
+        }
+        
+        // Iniciar la simulación de carga cuando la página se cargue
+        window.onload = simulateDataLoading;
+    </script>
+</body>
+</html>
