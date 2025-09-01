@@ -3,89 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/media/favicon.ico">
     <title>Aplicación con Splash Screen</title>
     <link rel="stylesheet" href="/style.css">
     <script src="/app.js"></script>
 </head>
 <body>
-    <div class="container">
-        <!-- Splash Screen -->
-        <div id="splash-screen" class="active">
-            <div class="logo-container">
-                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIiBmaWxsPSJub25lIj48Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9IjkwIiBmaWxsPSIjMzQ5OEZCIiBzdHJva2U9IiMyOTgwQjkiIHN0cm9rZS13aWR0aD0iNCIvPjxwYXRoIGQ9Ik03MCA3MCBBMzAgMzAgMCAxIDAgMTMwIDEzMCBBMzAgMzAgMCAxIDAgNzAgNzAiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iOCIgLz48cGF0aCBkPSJNNzAgNzAgTDEzMCAxMzAgTTEzMCA3MCBMNzAgMTMwIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjgiIC8+PC9zdmc+" alt="Logo" class="loading-logo">
-            </div>
-            <h2>Cargando datos</h2>
-            <p>Obteniendo información desde Google Sheets...</p>
-            <div class="progress-bar">
-                <div class="progress" id="progress"></div>
-            </div>
-            <p class="loading-text" id="loading-text">Iniciando...</p>
-        </div>
-        
-        <!-- Pantalla de Inicio -->
-        <div id="home-screen" class="screen">
-            <h1>Bienvenido a la Aplicación</h1>
-            <p>Selecciona una de las opciones para navegar a diferentes pantallas.</p>
-            <div class="btn-container">
-                <button onclick="showScreen('screen-01')">Botón 1</button>
-                <button onclick="showScreen('screen-02')">Botón 2</button>
-                <button onclick="showScreen('screen-03')">Botón 3</button>
-            </div>
-        </div>
-        
-        <!-- Pantalla 01 -->
-        <div id="screen-01" class="screen">
-            <div class="screen-indicator">Pantalla 01</div>
-            <div class="screen-content">
-                <div class="screen-icon">📱</div>
-                <h2>Pantalla 01</h2>
-                <p>Has navegado a la Pantalla 01. Esta es una pantalla de ejemplo con contenido único.</p>
-                <div class="btn-container">
-                    <button class="btn-back" onclick="showScreen('home-screen')">Volver al Inicio</button>
+    <!-- Contenedor para el splash screen -->
+    <div id="splashContainer"></div>
+    
+    <!-- Contenido principal (oculto inicialmente) -->
+    <div id="mainContent" class="hidden">
+        <div class="container">
+            <header>
+                <h1>Mi Aplicación Web</h1>
+                <p>Datos cargados desde Google Sheets</p>
+            </header>
+            
+            <div class="main-content">
+                <div class="controls">
+                    <button id="reloadBtn" class="btn">Recargar Datos</button>
+                    <button id="showSplashBtn" class="btn">Mostrar Splash Again</button>
+                </div>
+                
+                <h2>Datos Obtenidos:</h2>
+                <div id="dataDisplay" class="data-container">
+                    <!-- Los datos de Google Sheets se insertarán aquí -->
                 </div>
             </div>
-        </div>
-        
-        <!-- Pantalla 02 -->
-        <div id="screen-02" class="screen">
-            <div class="screen-indicator">Pantalla 02</div>
-            <div class="screen-content">
-                <div class="screen-icon">💻</div>
-                <h2>Pantalla 02</h2>
-                <p>Has navegado a la Pantalla 02. Esta es otra pantalla de ejemplo con contenido diferente.</p>
-                <div class="btn-container">
-                    <button class="btn-back" onclick="showScreen('home-screen')">Volver al Inicio</button>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Pantalla 03 -->
-        <div id="screen-03" class="screen">
-            <div class="screen-indicator">Pantalla 03</div>
-            <div class="screen-content">
-                <div class="screen-icon">🚀</div>
-                <h2>Pantalla 03</h2>
-                <p>Has navegado a la Pantalla 03. Esta pantalla tiene un botón adicional para ir a la Pantalla 04.</p>
-                <div class="btn-container">
-                    <button onclick="showScreen('screen-04')">Botón 4</button>
-                    <button class="btn-home" onclick="showScreen('home-screen')">Volver al Inicio</button>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Pantalla 04 -->
-        <div id="screen-04" class="screen">
-            <div class="screen-indicator">Pantalla 04</div>
-            <div class="screen-content">
-                <div class="screen-icon">🎯</div>
-                <h2>Pantalla 04</h2>
-                <p>Has navegado a la Pantalla 04. Esta pantalla fue accedida desde la Pantalla 03.</p>
-                <div class="btn-container">
-                    <button class="btn-back" onclick="showScreen('screen-03')">Volver a Pantalla 03</button>
-                </div>
-            </div>
+            
+            <footer>
+                <p>&copy; 2023 - Aplicación con Splash Screen y Google Sheets</p>
+            </footer>
         </div>
     </div>
+    <script>
 
+    </script>
 </body>
 </html>
